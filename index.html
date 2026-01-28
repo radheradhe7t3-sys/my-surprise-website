@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  padding:20px;
+  font-family:'Comic Neue', cursive;
+  text-align:center;
+  min-height:100vh;
+  transition:.4s;
+}
+
+/* THEMES */
+body.cute{background:linear-gradient(135deg,#ffecd2,#fcb69f);}
+body.romantic{background:linear-gradient(135deg,#ffe5ec,#ffc2d1);}
+body.dark{background:#0f172a;color:white;}
+body.funny{background:linear-gradient(135deg,#d9f99d,#86efac);}
+
+h1{
+  font-family:'Luckiest Guy', cursive;
+  font-size:2.6rem;
+  margin-bottom:10px;
+}
+
+/* ANIMATIONS */
+.fade{animation:fade 1.2s;}
+.slide{animation:slide 1.2s;}
+.bounce{animation:bounce 1.2s infinite;}
+.type{animation:none;}
+
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide{from{transform:translateY(20px)}to{transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+img{
+  max-width:200px;
+  border-radius:18px;
+  margin:20px auto;
+  display:none;
+}
+
+button{
+  padding:14px 28px;
+  border:none;
+  border-radius:14px;
+  background:#ff6f61;
+  color:white;
+  font-family:'Luckiest Guy', cursive;
+  font-size:1rem;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title"></h1>
+
+<img id="photo">
+
+<p id="question"></p>
+
+<button onclick="next()">Next 💖</button>
+
+<audio id="music" loop></audio>
+
+<script>
+/* EXPIRY CHECK */
+if(!localStorage.expiry || Date.now() > localStorage.expiry){
+  localStorage.clear();
+  location.href="customize.html";
+}
+
+/* LOAD DATA */
+const name = localStorage.personName || "Hey";
+const q1 = localStorage.q1 || "Are you smiling?";
+const theme = localStorage.theme || "cute";
+const anim = localStorage.animType || "fade";
+const photo = localStorage.photo;
+const music = localStorage.music;
+
+/* APPLY */
+document.body.classList.add(theme);
+document.getElementById("title").innerText = "Hey " + name + " 👀";
+
+const q = document.getElementById("question");
+q.innerText = q1;
+q.classList.add(anim);
+
+if(photo){
+  const img = document.getElementById("photo");
+  img.src = photo;
+  img.style.display = "block";
+}
+
+if(music){
+  const audio = document.getElementById("music");
+  audio.src = music;
+  document.body.addEventListener("click", () => audio.play(), { once:true });
+}
+
+function next(){
+  location.href="question2.html";
+}
+</script>
+
+</body>
+</html>

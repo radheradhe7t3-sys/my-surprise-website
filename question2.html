@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One More Question 💭</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  padding:20px;
+  font-family:'Comic Neue', cursive;
+  text-align:center;
+  min-height:100vh;
+}
+
+h1{
+  font-family:'Luckiest Guy', cursive;
+  font-size:2.4rem;
+  margin-bottom:20px;
+}
+
+button{
+  padding:14px 28px;
+  border:none;
+  border-radius:14px;
+  background:#ff6f61;
+  color:white;
+  font-family:'Luckiest Guy', cursive;
+  font-size:1rem;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="question"></h1>
+
+<button onclick="next()">Next ✨</button>
+
+<script>
+/* EXPIRY CHECK */
+if(!localStorage.expiry || Date.now() > localStorage.expiry){
+  localStorage.clear();
+  location.href="customize.html";
+}
+
+/* LOAD QUESTION */
+document.getElementById("question").innerText =
+  localStorage.q2 || "Are you feeling better now?";
+
+function next(){
+  location.href="final.html";
+}
+</script>
+
+</body>
+</html>
